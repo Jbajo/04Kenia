@@ -290,7 +290,7 @@ public class GestionParques {
             listaParques.get(opcion).visitarParque();
         }
         else{
-            System.out.println("No existe ninguna Reserva de Caza en el Sistema");
+            System.out.println("No existe ninguna Reserva de Caza en el sistema");
         }
 
     }
