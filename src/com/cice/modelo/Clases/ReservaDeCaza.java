@@ -1,5 +1,8 @@
 package com.cice.modelo.Clases;
 
+/**
+ * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
+ */
 public class ReservaDeCaza extends ParqueNacional {
     private float licencia;
     private String tipoArma;

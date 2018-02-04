@@ -2,6 +2,10 @@ package com.cice.modelo.Clases;
 
 import com.cice.modelo.Interfaces.IParque;
 
+/**
+ * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
+ */
+
 public abstract class ParqueNacional implements IParque {
     private float extension;
     private int numeroEspecies;
@@ -57,5 +61,12 @@ public abstract class ParqueNacional implements IParque {
     @Override
     public void visitarParque() {
         this.visitado = true;
+    }
+
+    @Override
+    public boolean comprobarNombre(String nombre) {
+        if (this.getNombre().equals(nombre))
+            return true;
+        return false;
     }
 }

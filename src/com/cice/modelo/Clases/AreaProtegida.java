@@ -2,6 +2,10 @@ package com.cice.modelo.Clases;
 
 import com.cice.modelo.Interfaces.IParque;
 
+/**
+ * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
+ */
+
 public abstract class AreaProtegida extends ParqueNacional{
     private float subvencion;
     private String ong;

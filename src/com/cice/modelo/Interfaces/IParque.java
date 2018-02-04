@@ -4,5 +4,6 @@ public interface IParque {
     String mostrarInformacion();
     String mostrarNombre();
     void visitarParque();
+    boolean comprobarNombre (String nombre);
 
 }

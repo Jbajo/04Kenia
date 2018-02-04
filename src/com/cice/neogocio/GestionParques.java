@@ -1,12 +1,18 @@
 package com.cice.neogocio;
 
+import com.cice.modelo.Clases.AreaProtegidaAcuatica;
+import com.cice.modelo.Clases.AreaProtegidaNoClasificada;
+import com.cice.modelo.Clases.AreaProtegidaTerrestre;
 import com.cice.modelo.Clases.ReservaDeCaza;
 import com.cice.modelo.Interfaces.IParque;
 
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
+ */
 public class GestionParques {
     private ArrayList<IParque> listaParques= new ArrayList <>();
 
@@ -41,23 +47,23 @@ public class GestionParques {
             case 0:
                 break;
             case 1:
-                //crear un Libro
+                //crear Reserva
                 crearReserva();
                 break;
             case 2:
-                //crear una Revista
+                //crear Area Protegida
                 crearAreaProtegida();
                 break;
             case 3:
-                //crear un Comic
+                //crear Parques
                 mostrarParques();
                 break;
             case 4:
-                //crear un Disco
+                //crear Nombre Parques
                 mostrarNombreParques();
                 break;
             case 5:
-                //mostrar Recursos no Prestados
+                //visitar Parque
             //    visitarParque();
                 break;
             default:
@@ -65,6 +71,10 @@ public class GestionParques {
                 break;
         }
     }
+
+    /**
+     * Método crearReserva crea una Reserva pidiendo al usuario los datos y la introduce en el ArrayList
+     */
 
     private void crearReserva(){
        Scanner sc = new Scanner (System.in);
@@ -74,13 +84,24 @@ public class GestionParques {
        String nombre;
        float licencia;
        String tipoArma;
+       boolean bandera = false;
 
        System.out.println("Introduzca una extension --> ");
        extension =  Float.parseFloat(sc.nextLine());
        System.out.println("Introduzca el numero de especies --> ");
        numeroEspecies = Integer.parseInt(sc.nextLine());
-       System.out.println("Introduzca un nombre --> ");
-       nombre = sc.nextLine();
+       do {
+           bandera = false;
+           System.out.println("Introduzca un nombre --> ");
+           nombre = sc.nextLine();
+           for (IParque parque : listaParques) {
+               if (parque.comprobarNombre(nombre))
+                   bandera = true;
+           }
+           if(bandera)
+               System.out.println("Opcion erronea...");
+       }while (bandera);
+
        System.out.println("Introduzca una licencia --> ");
        licencia =  Float.parseFloat(sc.nextLine());
        System.out.println("Introduzca el tipo de Arma --> ");
@@ -90,21 +111,155 @@ public class GestionParques {
        listaParques.add(reserva);
     }
 
+    /**
+     * Método crearAreaProtegida muestra al usuario las distintas Areas Protegidas a crear
+     */
     private void crearAreaProtegida(){
         Scanner sc = new Scanner (System.in);
-        int opcion;
+        int opcion = 1;
+
+        do {
+            if (opcion < 1 || opcion > 3)
+                System.out.println("Opcion no valida....");
+            System.out.println("Seleccione el tipo de Reserva");
+            System.out.println("1) Area Protegida Terrestre");
+            System.out.println("2) Area Protegida Acuatica");
+            System.out.println("3) Area Protegida No Clasificada");
+            opcion = Integer.parseInt(sc.nextLine());
+        }while (opcion< 1 || opcion > 3);
+
+        switch (opcion){
+            case 1:
+                crearAreaProtegidaTerrestre();
+                break;
+            case 2:
+                crearAreaProtegidaAcuatica();
+                break;
+            case 3:
+                crearAreaProtegidaNoClasificada();
+                break;
+            default:
+                break;
+
+        }
 
     }
 
-    private void mostrarParques(){
+    /**
+     * Método crearAreaProtegidaTerrestre crea un Area Protegida Terrestre pidiendo al usuario los datos y la introduce en el ArrayList
+     */
+    private void crearAreaProtegidaTerrestre(){
+        Scanner sc = new Scanner (System.in);
+        float extension;
+        int numeroEspecies;
+        String nombre;
+        String tipoTerreno;
+        boolean bandera = false;
 
+        System.out.println("Introduzca la extension");
+        extension = Float.parseFloat(sc.nextLine());
+        System.out.println("Introduzca el numero de especies");
+        numeroEspecies = Integer.parseInt(sc.nextLine());
+        do {
+            bandera = false;
+            System.out.println("Introduzca un nombre --> ");
+            nombre = sc.nextLine();
+            for (IParque parque : listaParques) {
+                if (parque.comprobarNombre(nombre))
+                    bandera = true;
+            }
+            if(bandera)
+                System.out.println("Opcion erronea...");
+        }while (bandera);
+        System.out.println("Introduzca un tipo de Terreno --> ");
+        tipoTerreno = sc.nextLine();
+
+        AreaProtegidaTerrestre areaTerrestre = new AreaProtegidaTerrestre(extension, numeroEspecies, nombre, tipoTerreno);
+        listaParques.add(areaTerrestre);
+    }
+
+
+    /**
+     * Método crearAreaProtegidaAcuatica crea un Area Protegida Acuatica pidiendo al usuario los datos y la introduce en el ArrayList
+     */
+    private void crearAreaProtegidaAcuatica(){
+        Scanner sc = new Scanner (System.in);
+        float extension;
+        int numeroEspecies;
+        String nombre;
+        int numeroLagos;
+        boolean bandera = false;
+
+        System.out.println("Introduzca la extension");
+        extension = Float.parseFloat(sc.nextLine());
+        System.out.println("Introduzca el numero de especies");
+        numeroEspecies = Integer.parseInt(sc.nextLine());
+        do {
+            bandera = false;
+            System.out.println("Introduzca un nombre --> ");
+            nombre = sc.nextLine();
+            for (IParque parque : listaParques) {
+                if (parque.comprobarNombre(nombre))
+                    bandera = true;
+            }
+            if(bandera)
+                System.out.println("Opcion erronea...");
+        }while (bandera);
+        System.out.println("Introduzca el numero de Lagos --> ");
+        numeroLagos = Integer.parseInt(sc.nextLine());
+
+        AreaProtegidaAcuatica areaAcuatica = new AreaProtegidaAcuatica(extension, numeroEspecies, nombre, numeroLagos);
+        listaParques.add(areaAcuatica);
+    }
+
+
+    /**
+     * Método crearAreaProtegidaNoClasificada crea un Area Protegida No Clasificada pidiendo al usuario los datos y la introduce en el ArrayList
+     */
+
+    private void crearAreaProtegidaNoClasificada(){
+        Scanner sc = new Scanner (System.in);
+        float extension;
+        int numeroEspecies;
+        String nombre;
+        boolean bandera = false;
+
+        System.out.println("Introduzca la extension");
+        extension = Float.parseFloat(sc.nextLine());
+        System.out.println("Introduzca el numero de especies");
+        numeroEspecies = Integer.parseInt(sc.nextLine());
+        do {
+            bandera = false;
+            System.out.println("Introduzca un nombre --> ");
+            nombre = sc.nextLine();
+            for (IParque parque : listaParques) {
+                if (parque.comprobarNombre(nombre))
+                    bandera = true;
+            }
+            if(bandera)
+                System.out.println("Opcion erronea...");
+        }while (bandera);
+        AreaProtegidaNoClasificada areaNoClasificada = new AreaProtegidaNoClasificada(extension, numeroEspecies, nombre);
+        listaParques.add(areaNoClasificada);
+    }
+
+    /**
+     * Método mostrarParques muestra los Parques del ArrayList por pantalla
+     */
+    private void mostrarParques(){
+        int i = 0;
         for (IParque parque : listaParques){
             System.out.println(parque.mostrarInformacion());
         }
 
     }
 
+    /**
+     * Método mostrarNombreParques muestra los nombres de los Parques del ArrayList por pantalla
+     */
+
     private void mostrarNombreParques(){
+        int i = 0;
         for (IParque parque : listaParques){
             System.out.println(parque.mostrarNombre());
         }
