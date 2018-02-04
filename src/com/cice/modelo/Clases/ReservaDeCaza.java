@@ -47,5 +47,8 @@ public class ReservaDeCaza extends ParqueNacional {
     public String mostrarNombre() {
         return "Reserva de Caza --> Nombre: +" + this.getNombre();
     }
-
+    @Override
+    public void visitarParque() {
+        this.setVisitado(true);
+    }
 }

@@ -16,6 +16,7 @@ public abstract class ParqueNacional implements IParque {
         this.extension = extension;
         this.numeroEspecies = numeroEspecies;
         this.nombre = nombre;
+        this.visitado = false;
     }
 
     public ParqueNacional() {
@@ -43,6 +44,14 @@ public abstract class ParqueNacional implements IParque {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean isVisitado() {
+        return visitado;
+    }
+
+    public void setVisitado(boolean visitado) {
+        this.visitado = visitado;
     }
 
     @Override

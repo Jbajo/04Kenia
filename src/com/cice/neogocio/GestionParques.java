@@ -64,7 +64,7 @@ public class GestionParques {
                 break;
             case 5:
                 //visitar Parque
-            //    visitarParque();
+                visitarParque();
                 break;
             default:
                 System.out.println("la opcion seleccionada no es valida");
@@ -249,7 +249,8 @@ public class GestionParques {
     private void mostrarParques(){
         int i = 0;
         for (IParque parque : listaParques){
-            System.out.println(parque.mostrarInformacion());
+            System.out.println("i) "+parque.mostrarInformacion());
+            i++;
         }
 
     }
@@ -261,9 +262,36 @@ public class GestionParques {
     private void mostrarNombreParques(){
         int i = 0;
         for (IParque parque : listaParques){
-            System.out.println(parque.mostrarNombre());
+            System.out.println("i) "+ parque.mostrarNombre());
+            i++;
         }
 
+
+    }
+
+    private void visitarParque(){
+        Scanner sc = new Scanner (System.in);
+        int opcion;
+        boolean bandera = false;
+
+        for(IParque parque : listaParques){
+            if(parque instanceof ReservaDeCaza && ((ReservaDeCaza)parque).isVisitado()==false)
+                bandera = true;
+        }
+        if (bandera) {
+            do {
+                System.out.println("Seleccione un Parque (Solo son Visitables las Reservas de Caza)...");
+                mostrarNombreParques();
+                opcion = Integer.parseInt(sc.nextLine());
+                opcion--;
+            }
+            while (opcion < listaParques.size() - 1 || opcion > listaParques.size() - 1 || !(listaParques.get(opcion) instanceof ReservaDeCaza && ((ReservaDeCaza) listaParques.get(opcion)).isVisitado() == false));
+
+            listaParques.get(opcion).visitarParque();
+        }
+        else{
+            System.out.println("No existe ninguna Reserva de Caza en el Sistema");
+        }
 
     }
 
