@@ -1,51 +1,19 @@
 package com.cice.modelo.Clases;
 
+import com.cice.modelo.Enums.EnumVisitable;
+
 /**
  * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
  */
 public class AreaProtegidaNoClasificada extends AreaProtegida{
-    private float extension;
-    private int numeroEspecies;
-    private String nombre;
 
-    public AreaProtegidaNoClasificada(float extension, int numeroEspecies, String nombre) {
-        this.extension = extension;
-        this.numeroEspecies = numeroEspecies;
-        this.nombre = nombre;
+    public AreaProtegidaNoClasificada(float extension, int numeroEspecies, String nombre, float subvencion, String ong, EnumVisitable enumVisitable) {
+        super(extension, numeroEspecies, nombre, subvencion, ong, enumVisitable);
     }
 
     public AreaProtegidaNoClasificada() {
     }
 
-    @Override
-    public float getExtension() {
-        return extension;
-    }
-
-    @Override
-    public void setExtension(float extension) {
-        this.extension = extension;
-    }
-
-    @Override
-    public int getNumeroEspecies() {
-        return numeroEspecies;
-    }
-
-    @Override
-    public void setNumeroEspecies(int numeroEspecies) {
-        this.numeroEspecies = numeroEspecies;
-    }
-
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
     @Override
     public String mostrarInformacion() {
         return "Area Protegida No Clasificada{" +

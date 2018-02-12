@@ -1,54 +1,21 @@
 package com.cice.modelo.Clases;
 
+import com.cice.modelo.Enums.EnumVisitable;
+
 /**
  * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
  */
 public class AreaProtegidaAcuatica extends AreaProtegida {
-    private float extension;
-    private int numeroEspecies;
-    private String nombre;
+
     private int numeroLagos;
 
-    public AreaProtegidaAcuatica(float extension, int numeroEspecies, String nombre, int numeroLagos) {
-        this.extension = extension;
-        this.numeroEspecies = numeroEspecies;
-        this.nombre = nombre;
+    public AreaProtegidaAcuatica(float extension, int numeroEspecies, String nombre, float subvencion, String ong, EnumVisitable enumVisitable,  int numeroLagos) {
+        super(extension, numeroEspecies, nombre, subvencion, ong, enumVisitable);
         this.numeroLagos = numeroLagos;
     }
 
     public AreaProtegidaAcuatica() {
     }
-
-    @Override
-    public float getExtension() {
-        return extension;
-    }
-
-    @Override
-    public void setExtension(float extension) {
-        this.extension = extension;
-    }
-
-    @Override
-    public int getNumeroEspecies() {
-        return numeroEspecies;
-    }
-
-    @Override
-    public void setNumeroEspecies(int numeroEspecies) {
-        this.numeroEspecies = numeroEspecies;
-    }
-
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public int getNumeroLagos() {
         return numeroLagos;
     }

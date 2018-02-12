@@ -1,5 +1,6 @@
 package com.cice.modelo.Clases;
 
+import com.cice.modelo.Enums.EnumVisitable;
 import com.cice.modelo.Interfaces.IParque;
 
 /**
@@ -10,8 +11,8 @@ public abstract class AreaProtegida extends ParqueNacional{
     private float subvencion;
     private String ong;
 
-    public AreaProtegida(float extension, int numeroEspecies, String nombre, float subvencion, String ong) {
-        super(extension, numeroEspecies, nombre);
+    public AreaProtegida(float extension, int numeroEspecies, String nombre, float subvencion, String ong, EnumVisitable enumVisitable) {
+        super(extension, numeroEspecies, nombre, enumVisitable);
         this.subvencion = subvencion;
         this.ong = ong;
 

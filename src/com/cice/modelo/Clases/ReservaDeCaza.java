@@ -1,5 +1,7 @@
 package com.cice.modelo.Clases;
 
+import com.cice.modelo.Enums.EnumVisitable;
+
 /**
  * @author Javier Bajo Chacon  javier.bajochacon@gmail.com
  */
@@ -7,8 +9,8 @@ public class ReservaDeCaza extends ParqueNacional {
     private float licencia;
     private String tipoArma;
 
-    public ReservaDeCaza(float extension, int numeroEspecies, String nombre, float licencia, String tipoArma) {
-        super(extension, numeroEspecies, nombre);
+    public ReservaDeCaza(float extension, int numeroEspecies, String nombre, float licencia, String tipoArma, EnumVisitable enumVisitable) {
+        super(extension, numeroEspecies, nombre, enumVisitable);
         this.licencia = licencia;
         this.tipoArma = tipoArma;
     }

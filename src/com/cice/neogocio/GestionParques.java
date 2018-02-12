@@ -1,9 +1,7 @@
 package com.cice.neogocio;
 
-import com.cice.modelo.Clases.AreaProtegidaAcuatica;
-import com.cice.modelo.Clases.AreaProtegidaNoClasificada;
-import com.cice.modelo.Clases.AreaProtegidaTerrestre;
-import com.cice.modelo.Clases.ReservaDeCaza;
+import com.cice.modelo.Clases.*;
+import com.cice.modelo.Enums.EnumVisitable;
 import com.cice.modelo.Interfaces.IParque;
 
 
@@ -107,7 +105,7 @@ public class GestionParques {
        System.out.println("Introduzca el tipo de Arma --> ");
        tipoArma = sc.nextLine();
 
-       ReservaDeCaza reserva = new ReservaDeCaza(extension, numeroEspecies, nombre, licencia, tipoArma);
+       ReservaDeCaza reserva = new ReservaDeCaza(extension, numeroEspecies, nombre, licencia, tipoArma, EnumVisitable.RESERVADECAZA);
        listaParques.add(reserva);
     }
 
@@ -155,6 +153,8 @@ public class GestionParques {
         String nombre;
         String tipoTerreno;
         boolean bandera = false;
+        float subvencion;
+        String ong;
 
         System.out.println("Introduzca la extension");
         extension = Float.parseFloat(sc.nextLine());
@@ -173,8 +173,11 @@ public class GestionParques {
         }while (bandera);
         System.out.println("Introduzca un tipo de Terreno --> ");
         tipoTerreno = sc.nextLine();
-
-        AreaProtegidaTerrestre areaTerrestre = new AreaProtegidaTerrestre(extension, numeroEspecies, nombre, tipoTerreno);
+        System.out.println("Introduzca la subvención concedida --> ");
+        subvencion =Integer.parseInt(sc.nextLine());
+        System.out.println("Introduzca el nombre de la ONG --> ");
+        ong = sc.nextLine();
+        AreaProtegidaTerrestre areaTerrestre = new AreaProtegidaTerrestre(extension, numeroEspecies, nombre, subvencion, ong, EnumVisitable.AREAPROTEGIDATERRESTRE, tipoTerreno);
         listaParques.add(areaTerrestre);
     }
 
@@ -189,6 +192,8 @@ public class GestionParques {
         String nombre;
         int numeroLagos;
         boolean bandera = false;
+        String ong;
+        float subvencion;
 
         System.out.println("Introduzca la extension");
         extension = Float.parseFloat(sc.nextLine());
@@ -207,8 +212,12 @@ public class GestionParques {
         }while (bandera);
         System.out.println("Introduzca el numero de Lagos --> ");
         numeroLagos = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduzca la subvención concedida --> ");
+        subvencion =Integer.parseInt(sc.nextLine());
+        System.out.println("Introduzca el nombre de la ONG --> ");
+        ong = sc.nextLine();
 
-        AreaProtegidaAcuatica areaAcuatica = new AreaProtegidaAcuatica(extension, numeroEspecies, nombre, numeroLagos);
+        AreaProtegidaAcuatica areaAcuatica = new AreaProtegidaAcuatica(extension, numeroEspecies, nombre,  subvencion, ong, EnumVisitable.AREAPROTEGIDAACUATICA, numeroLagos);
         listaParques.add(areaAcuatica);
     }
 
@@ -223,6 +232,8 @@ public class GestionParques {
         int numeroEspecies;
         String nombre;
         boolean bandera = false;
+        String ong;
+        float subvencion;
 
         System.out.println("Introduzca la extension");
         extension = Float.parseFloat(sc.nextLine());
@@ -239,7 +250,12 @@ public class GestionParques {
             if(bandera)
                 System.out.println("Opcion erronea...");
         }while (bandera);
-        AreaProtegidaNoClasificada areaNoClasificada = new AreaProtegidaNoClasificada(extension, numeroEspecies, nombre);
+        System.out.println("Introduzca la subvención concedida --> ");
+        subvencion =Integer.parseInt(sc.nextLine());
+        System.out.println("Introduzca el nombre de la ONG --> ");
+        ong = sc.nextLine();
+
+        AreaProtegidaNoClasificada areaNoClasificada = new AreaProtegidaNoClasificada(extension, numeroEspecies, nombre, subvencion, ong, EnumVisitable.AREAPROTEGIDANOCLASIFICADA);
         listaParques.add(areaNoClasificada);
     }
 
@@ -249,7 +265,7 @@ public class GestionParques {
     private void mostrarParques(){
         int i = 0;
         for (IParque parque : listaParques){
-            System.out.println("i) "+parque.mostrarInformacion());
+            System.out.println(i+ " ) "+parque.mostrarInformacion());
             i++;
         }
 
@@ -275,17 +291,18 @@ public class GestionParques {
         boolean bandera = false;
 
         for(IParque parque : listaParques){
-            if(parque instanceof ReservaDeCaza && ((ReservaDeCaza)parque).isVisitado()==false)
+            if(parque.isVisitado()==false)
                 bandera = true;
         }
         if (bandera) {
+
             do {
                 System.out.println("Seleccione un Parque (Solo son Visitables las Reservas de Caza)...");
                 mostrarNombreParques();
                 opcion = Integer.parseInt(sc.nextLine());
                 opcion--;
             }
-            while (opcion < listaParques.size() - 1 || opcion > listaParques.size() - 1 || !(listaParques.get(opcion) instanceof ReservaDeCaza && ((ReservaDeCaza) listaParques.get(opcion)).isVisitado() == false));
+            while ((opcion < this.listaParques.size() - 1) || opcion >this.listaParques.size() - 1 || listaParques.get(opcion).getVisitable().isVisitable()==false);
 
             listaParques.get(opcion).visitarParque();
         }

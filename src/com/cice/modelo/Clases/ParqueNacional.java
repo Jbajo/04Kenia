@@ -1,5 +1,6 @@
 package com.cice.modelo.Clases;
 
+import com.cice.modelo.Enums.EnumVisitable;
 import com.cice.modelo.Interfaces.IParque;
 
 /**
@@ -11,12 +12,14 @@ public abstract class ParqueNacional implements IParque {
     private int numeroEspecies;
     private String nombre;
     private boolean visitado;
+    private EnumVisitable visitable;
 
-    public ParqueNacional(float extension, int numeroEspecies, String nombre) {
+    public ParqueNacional(float extension, int numeroEspecies, String nombre, EnumVisitable enumVisitable) {
         this.extension = extension;
         this.numeroEspecies = numeroEspecies;
         this.nombre = nombre;
         this.visitado = false;
+        this.visitable = enumVisitable;
     }
 
     public ParqueNacional() {
@@ -52,6 +55,15 @@ public abstract class ParqueNacional implements IParque {
 
     public void setVisitado(boolean visitado) {
         this.visitado = visitado;
+    }
+
+
+    public EnumVisitable getVisitable() {
+        return visitable;
+    }
+
+    public void setVisitable(EnumVisitable visitable) {
+        this.visitable = visitable;
     }
 
     @Override
